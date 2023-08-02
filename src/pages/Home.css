@@ -1,0 +1,24 @@
+
+.homepage {
+  
+}
+
+.homepage .mice {
+  font-size: xxx-large;
+  color: green;
+}
+
+.homepage .mute {
+  font-size: xxx-large;
+  color: red;
+}
+
+.homepage .editable {
+  border: 1px solid rgba(34,36,38,.15);
+  width: 650px;
+  height: 350px;
+  overflow: auto;
+  bottom: 0;
+}
+
+* { font-family: "Amazon Ember", Helvetica, Arial, sans-serif; }

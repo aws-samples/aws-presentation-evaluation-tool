@@ -1,0 +1,13 @@
+[
+  {
+    "Action": 
+      ["iam:CreatePolicy",
+      "iam:GetRole",
+      "iam:CreateRole",
+      "iam:AttachRolePolicy",
+      "sts:GetCallerIdentity",
+      "sts:AssumeRole"],
+    "Resource": 
+      ["*"]
+  }
+]

@@ -1,0 +1,45 @@
+@import "@aws-amplify/ui-react/styles.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --amplify-fonts-default-variable: "Open Sans";
+  --amplify-fonts-default-static: "Open Sans";
+  --amplify-colors-brand-primary-10: var(--amplify-colors-blue-10);
+  --amplify-colors-brand-primary-20: var(--amplify-colors-blue-20);
+  --amplify-colors-brand-primary-40: var(--amplify-colors-blue-40);
+  --amplify-colors-brand-primary-60: var(--amplify-colors-blue-60);
+  --amplify-colors-brand-primary-80: var(--amplify-colors-blue-80);
+  --amplify-colors-brand-primary-90: var(--amplify-colors-blue-90);
+  --amplify-colors-brand-primary-100: var(--amplify-colors-blue-100);
+  --amplify-colors-brand-secondary-10: var(--amplify-colors-neutral-10);
+  --amplify-colors-brand-secondary-20: var(--amplify-colors-neutral-20);
+  --amplify-colors-brand-secondary-40: var(--amplify-colors-neutral-40);
+  --amplify-colors-brand-secondary-60: var(--amplify-colors-neutral-60);
+  --amplify-colors-brand-secondary-80: var(--amplify-colors-neutral-80);
+  --amplify-colors-brand-secondary-90: var(--amplify-colors-neutral-90);
+  --amplify-colors-brand-secondary-100: var(--amplify-colors-neutral-100);
+  --amplify-colors-radii-small: 0;
+  --amplify-colors-radii-medium: 2px;
+  --amplify-colors-radii-large: 4px;
+  --amplify-colors-border-primary: var(--amplify-colors-neutral-40);
+  --amplify-colors-border-secondary: var(--amplify-colors-neutral-20);
+  --amplify-colors-border-tertiary: var(--amplify-colors-neutral-10);
+  --amplify-colors-background-secondary: var(--amplify-colors-brand-primary-10);
+  --amplify-components-tabs-item-border-color: var(--amplify-colors-neutral-60);
+
+  --amplify-radii-small: 0;
+  --amplify-radii-medium: 0;
+  --amplify-radii-large: 0;
+  --amplify-space-small: 1rem;
+  --amplify-space-medium: 1.5rem;
+  --amplify-space-large: 2rem;
+  --amplify-border-widths-small: 2px;
+  --amplify-border-widths-medium: 4px;
+  --amplify-border-widths-large: 8px;
+}

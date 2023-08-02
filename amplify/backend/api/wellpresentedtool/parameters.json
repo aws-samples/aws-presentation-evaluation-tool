@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "wellpresentedtool",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authwellpresentedtoolcd58577ccd58577c",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
