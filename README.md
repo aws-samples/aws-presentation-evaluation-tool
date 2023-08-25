@@ -59,7 +59,7 @@ npm install --legacy-peer-deps
 amplify init
 ```
 
-This will install the necessary node packages and bootstrap the Amplify environment for deployment.
+This will install the necessary JavaScript packages and bootstrap the Amplify environment for deployment.
 
 ## Deploy
 
