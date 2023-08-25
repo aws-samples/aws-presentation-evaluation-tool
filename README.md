@@ -44,7 +44,7 @@ Before deploying this application, you will need to install the [Amplify CLI](ht
 clone the repo:
 
 ```bash
-git clone https://github.com/aws-amplify/amplify-js-samples .
+git clone https://github.com/aws-samples/aws-presentation-evaluation-tool.git .
 ```
 
 ## Build
