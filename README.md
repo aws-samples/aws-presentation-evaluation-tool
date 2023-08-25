@@ -41,11 +41,13 @@ Before deploying this application, you will need to install the [Amplify CLI](ht
 
 
 ## Setup
-clone the repo:
+Clone the repo:
 
 ```bash
 git clone https://github.com/aws-samples/aws-presentation-evaluation-tool.git .
 ```
+
+Change the bucket name in `amplify/backend/hosting/S3AndCloudFront/parameters.json` from `<S3-BUCKET-NAME>` to a name of your choosing according to the [S3 bucket naming rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).
 
 ## Build
 
