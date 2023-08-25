@@ -35,7 +35,7 @@ Public speaking skills are fundamental for professional development, regardless 
 
 aws-presentation-evaluation-tool is a scalable solution that integrates ML services with video streaming in order to extract insights that define a successful presentation (i.e. words-per-minutes, eye contact, filler words, weasel words, and more.). Using services such as Transcribe, Comprehend and models such as [PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet), aws-presentation-evaluation-tool analyzes presenters and generates instant reports that provides insights into user presentations, as well as real-time prompts on areas to improve.
 
-![alt text](./wpt.png "aws-presentation-evaluation-tool Architecture")
+![alt text](./wpt-architecture.jpg "aws-presentation-evaluation-tool Architecture")
 
 Before deploying this application, you will need to install the [Amplify CLI](https://docs.amplify.aws/cli/start/install/) and the [AWS Cloud Development Kit (CDK)](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html).
 
