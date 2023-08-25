@@ -63,7 +63,7 @@ This will install the necessary JavaScript packages and bootstrap the Amplify en
 
 ## Deploy
 
-Run `amplify push`. This will deploy / redeploy your Amplify to your AWS Account.
+Run `amplify publish`. This will deploy / redeploy your Amplify to your AWS Account.
 
 After the deployment you will see the Amplify URL, which represents the url hosting the web app.
 
