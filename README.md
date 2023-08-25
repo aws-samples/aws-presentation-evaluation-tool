@@ -52,7 +52,7 @@ git clone https://github.com/aws-samples/aws-presentation-evaluation-tool.git .
 To build this app, you need to be in this project's root folder. Then run the following:
 
 ```bash
-cd amplify-deployable
+cd aws-presentation-evaluation-tool
 npm install --legacy-peer-deps
 amplify init
 ```
