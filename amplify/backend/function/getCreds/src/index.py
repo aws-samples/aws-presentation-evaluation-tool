@@ -84,16 +84,17 @@ def handler(context, event):
     
     # Update role or create it if it doesn't exist
     try:
-        iam.update_assume_role_policy(
-            RoleName='WellPresentedSTS',
-            PolicyDocument=json.dumps(trustPolicy)
-        )
-        print('role updated')
-        roleArn = iam.get_role(
+        role = iam.get_role(
             RoleName='WellPresentedSTS'
-        )['Role']['Arn']
+        )
+        roleArn = role['Role']['Arn']
+        policyTrustPrincipal = role['Role']['AssumeRolePolicyDocument']['Statement'][1]['Principal']['AWS']
+        if policyTrustPrincipal != sts.get_caller_identity()['Arn']: 
+            iam.update_assume_role_policy(
+                RoleName='WellPresentedSTS',
+                PolicyDocument=json.dumps(trustPolicy)
+            )
     except iam.exceptions.NoSuchEntityException:
-        print(sts.get_caller_identity())
         roleArn = iam.create_role(
             RoleName='WellPresentedSTS',
             Description='Role for Transcribe usage',
@@ -104,8 +105,6 @@ def handler(context, event):
             RoleName='WellPresentedSTS',
             PolicyArn=policyArn
         )
-        # wait 10 seconds because the trust policy takes a while to attach
-        time.sleep(10)
     except Exception as e:
         print(e)
         return {"statusCode": 500}
@@ -113,10 +112,19 @@ def handler(context, event):
     sts = boto3.client('sts' , 
     endpoint_url = 'https://sts.{}.amazonaws.com'.format(os.environ['AWS_REGION'])
     )
-    accessCredentials = sts.assume_role(
-        RoleArn=roleArn,
-        RoleSessionName="access_session_role"
-    )['Credentials']
+    accessCredentials = None
+    # retry assuming role every 3 seconds until timout because the trust policy takes a while to attach
+    while True:
+        if accessCredentials:
+            break
+        try:
+            accessCredentials = sts.assume_role(
+                RoleArn=roleArn,
+                RoleSessionName="access_session_role"
+            )['Credentials']
+        except Exception as e:
+            print(e)
+            time.sleep(3)
     result = {}
     result['accessKeyId'] = accessCredentials['AccessKeyId']
     result['secretAccessKey'] = accessCredentials['SecretAccessKey']
