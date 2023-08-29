@@ -14,6 +14,7 @@
   <a href="#setup">Setup</a> •
   <a href="#build">Build</a> •
   <a href="#deploy">Deploy</a> •
+  <a href="#cleanup">Cleanup</a> •
 </p>
 
 ![Stability: Experimental](https://img.shields.io/badge/stability-Experimental-important.svg?style=for-the-badge)
@@ -67,5 +68,14 @@ Run `amplify publish`. This will deploy / redeploy your Amplify to your AWS Acco
 
 After the deployment you will see the Amplify URL, which represents the url hosting the web app.
 
-Happy presenting:)
+Happy presenting :)
 
+## Cleanup
+
+1. Run `amplify delete`. This will delete Amplify-deployed resources from your AWS Account.
+
+2. Confirm that the S3 bucket from the `Setup` step and Amplify deployment (`amplify-projectname-envname-12345-deployment`) bucket has been emptied and deleted in the [S3 console](https://s3.console.aws.amazon.com/s3/home?region=us-east-1).
+
+3. Delete the `WellPresentedSTS` IAM role and `useTranscribeComprehend` IAM policy in the [IAM console](https://us-east-1.console.aws.amazon.com/iam/home#/home).
+
+4. Empty the log groups associated with the Amplify project. Their names will be formatted as `/aws/lambda/amplify-proejctname-LogGroup-abcde1234`.
