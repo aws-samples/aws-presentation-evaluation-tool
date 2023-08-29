@@ -40,6 +40,8 @@ aws-presentation-evaluation-tool is a scalable solution that integrates ML servi
 
 Before deploying this application, you will need to install the [Amplify CLI](https://docs.amplify.aws/cli/start/install/) and the [AWS Cloud Development Kit (CDK)](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html).
 
+Since this application builds and packages a Python Lambda function, you may also need to install [Python 3.8](https://www.python.org/downloads/), [virtualenv](https://virtualenv.pypa.io/en/stable/installation.html), and [pipenv](https://pipenv.pypa.io/en/latest/installation/).
+
 
 ## Setup
 Clone the repo:
