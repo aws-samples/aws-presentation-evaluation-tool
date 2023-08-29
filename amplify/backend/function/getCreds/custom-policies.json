@@ -5,6 +5,7 @@
       "iam:GetRole",
       "iam:CreateRole",
       "iam:AttachRolePolicy",
+      "iam:UpdateAssumeRolePolicy",
       "sts:GetCallerIdentity",
       "sts:AssumeRole"],
     "Resource": 

@@ -67,32 +67,44 @@ def handler(context, event):
             }
         ]
     }
-
+    
+    # Set policy or create it if it doesn't exist
+    policyArn = ''
     try:
+        policyArn = iam.create_policy(
+            PolicyName='useTranscribeComprehend',
+            PolicyDocument=json.dumps(permissionsPolicy)
+        )['Policy']['Arn']
+    except iam.exceptions.EntityAlreadyExistsException:
+        policyArn = 'arn:aws:iam::' + sts.get_caller_identity()['Account'] + ':policy/useTranscribeComprehend'
+    except Exception as e:
+        print(e)
+        return {"statusCode": 500}
+    print('policy:', policyArn)
+    
+    # Update role or create it if it doesn't exist
+    try:
+        iam.update_assume_role_policy(
+            RoleName='WellPresentedSTS',
+            PolicyDocument=json.dumps(trustPolicy)
+        )
+        print('role updated')
         roleArn = iam.get_role(
             RoleName='WellPresentedSTS'
-        )
-        print(roleArn)
-        roleArn = roleArn['Role']['Arn']
+        )['Role']['Arn']
     except iam.exceptions.NoSuchEntityException:
         print(sts.get_caller_identity())
-        role = iam.create_role(
+        roleArn = iam.create_role(
             RoleName='WellPresentedSTS',
             Description='Role for Transcribe usage',
             MaxSessionDuration=36000,
             AssumeRolePolicyDocument=json.dumps(trustPolicy)
-        )
-        print(role)
-        roleArn = role['Role']['Arn']
-        policy = iam.create_policy(
-            PolicyName='useTranscribeComprehend',
-            PolicyDocument=json.dumps(permissionsPolicy)
-        )
-        print(policy)
+        )['Role']['Arn']
         iam.attach_role_policy(
             RoleName='WellPresentedSTS',
-            PolicyArn=policy['Policy']['Arn']
+            PolicyArn=policyArn
         )
+        # wait 10 seconds because the trust policy takes a while to attach
         time.sleep(10)
     except Exception as e:
         print(e)
