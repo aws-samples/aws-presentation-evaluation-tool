@@ -67,44 +67,33 @@ def handler(context, event):
             }
         ]
     }
-    
-    # Set policy or create it if it doesn't exist
-    policyArn = ''
+
     try:
-        policyArn = iam.create_policy(
-            PolicyName='useTranscribeComprehend',
-            PolicyDocument=json.dumps(permissionsPolicy)
-        )['Policy']['Arn']
-    except iam.exceptions.EntityAlreadyExistsException:
-        policyArn = 'arn:aws:iam::' + sts.get_caller_identity()['Account'] + ':policy/useTranscribeComprehend'
-    except Exception as e:
-        print(e)
-        return {"statusCode": 500}
-    print('policy:', policyArn)
-    
-    # Update role or create it if it doesn't exist
-    try:
-        role = iam.get_role(
+        roleArn = iam.get_role(
             RoleName='WellPresentedSTS'
         )
-        roleArn = role['Role']['Arn']
-        policyTrustPrincipal = role['Role']['AssumeRolePolicyDocument']['Statement'][1]['Principal']['AWS']
-        if policyTrustPrincipal != sts.get_caller_identity()['Arn']: 
-            iam.update_assume_role_policy(
-                RoleName='WellPresentedSTS',
-                PolicyDocument=json.dumps(trustPolicy)
-            )
+        print(roleArn)
+        roleArn = roleArn['Role']['Arn']
     except iam.exceptions.NoSuchEntityException:
-        roleArn = iam.create_role(
+        print(sts.get_caller_identity())
+        role = iam.create_role(
             RoleName='WellPresentedSTS',
             Description='Role for Transcribe usage',
             MaxSessionDuration=36000,
             AssumeRolePolicyDocument=json.dumps(trustPolicy)
-        )['Role']['Arn']
+        )
+        print(role)
+        roleArn = role['Role']['Arn']
+        policy = iam.create_policy(
+            PolicyName='useTranscribeComprehend',
+            PolicyDocument=json.dumps(permissionsPolicy)
+        )
+        print(policy)
         iam.attach_role_policy(
             RoleName='WellPresentedSTS',
-            PolicyArn=policyArn
+            PolicyArn=policy['Policy']['Arn']
         )
+        time.sleep(10)
     except Exception as e:
         print(e)
         return {"statusCode": 500}
@@ -112,19 +101,10 @@ def handler(context, event):
     sts = boto3.client('sts' , 
     endpoint_url = 'https://sts.{}.amazonaws.com'.format(os.environ['AWS_REGION'])
     )
-    accessCredentials = None
-    # retry assuming role every 3 seconds until timout because the trust policy takes a while to attach
-    while True:
-        if accessCredentials:
-            break
-        try:
-            accessCredentials = sts.assume_role(
-                RoleArn=roleArn,
-                RoleSessionName="access_session_role"
-            )['Credentials']
-        except Exception as e:
-            print(e)
-            time.sleep(3)
+    accessCredentials = sts.assume_role(
+        RoleArn=roleArn,
+        RoleSessionName="access_session_role"
+    )['Credentials']
     result = {}
     result['accessKeyId'] = accessCredentials['AccessKeyId']
     result['secretAccessKey'] = accessCredentials['SecretAccessKey']
