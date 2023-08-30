@@ -40,28 +40,9 @@ def handler(context, event):
                 "Sid": "VisualEditor0",
                 "Effect": "Allow",
                 "Action": [
-                    "comprehend:DescribeSentimentDetectionJob",
-                    "comprehend:DescribeTopicsDetectionJob",
-                    "comprehend:DetectSentiment",
-                    "comprehend:DescribeEntityRecognizer",
-                    "comprehend:DescribeDominantLanguageDetectionJob",
-                    "comprehend:DescribeDocumentClassificationJob",
-                    "comprehend:BatchDetectSentiment",
-                    "comprehend:BatchDetectEntities",
-                    "comprehend:BatchDetectKeyPhrases",
-                    "comprehend:DetectDominantLanguage",
-                    "comprehend:DescribeEntitiesDetectionJob",
-                    "comprehend:ClassifyDocument",
-                    "comprehend:DetectSyntax",
-                    "comprehend:DescribeDocumentClassifier",
-                    "comprehend:BatchDetectSyntax",
                     "transcribe:StartStreamTranscription",
-                    "comprehend:BatchDetectDominantLanguage",
-                    "comprehend:DescribeEndpoint",
                     "comprehend:DetectEntities",
-                    "transcribe:StartStreamTranscriptionWebSocket",
-                    "comprehend:DetectKeyPhrases",
-                    "comprehend:DescribeKeyPhrasesDetectionJob"
+                    "transcribe:StartStreamTranscriptionWebSocket"
                 ],
                 "Resource": "*"
             }
